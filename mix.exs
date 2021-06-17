@@ -20,7 +20,7 @@ defmodule UseIndie.MixProject do
   def application do
     [
       mod: {UseIndie.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :ex_machina]
     ]
   end
 
@@ -42,7 +42,17 @@ defmodule UseIndie.MixProject do
       {:telemetry_poller, "~> 0.4"},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
-      {:plug_cowboy, "~> 2.0"}
+      {:plug_cowboy, "~> 2.0"},
+      {:waffle, "~> 1.1"},
+      {:ex_aws, "~> 2.1.2"},
+      {:ex_aws_s3, "~> 2.0"},
+      {:hackney, "~> 1.9"},
+      {:sweet_xml, "~> 0.6"},
+      {:waffle_ecto, "~> 0.0"},
+      {:mix_test_watch, "~> 1.0", only: :dev, runtime: false},
+      {:ex_machina, "~> 2.7.0", only: :test},
+      {:bamboo, "~> 2.2.0"},
+      {:bamboo_phoenix, "~> 1.0.0"}
     ]
   end
 
