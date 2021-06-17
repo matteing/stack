@@ -20,7 +20,7 @@ defmodule UseIndie.MixProject do
   def application do
     [
       mod: {UseIndie.Application, []},
-      extra_applications: [:logger, :runtime_tools, :ex_machina]
+      extra_applications: [:logger, :runtime_tools]
     ]
   end
 
@@ -52,6 +52,7 @@ defmodule UseIndie.MixProject do
       {:mix_test_watch, "~> 1.0", only: :dev, runtime: false},
       {:ex_machina, "~> 2.7.0", only: :test},
       {:bamboo, "~> 2.2.0"},
+      {:bcrypt_elixir, "~> 2.0"},
       {:bamboo_phoenix, "~> 1.0.0"}
     ]
   end
