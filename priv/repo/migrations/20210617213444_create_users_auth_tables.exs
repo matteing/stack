@@ -5,6 +5,8 @@ defmodule UseIndie.Repo.Migrations.CreateUsersAuthTables do
     execute "CREATE EXTENSION IF NOT EXISTS citext", ""
 
     create table(:users) do
+      add :is_active, :boolean, default: false
+      add :is_staff, :boolean, default: false
       add :email, :citext, null: false
       add :hashed_password, :string, null: false
       add :full_name, :string

@@ -5,6 +5,7 @@ defmodule UseIndie.Factory do
     password = Map.get(attrs, :password, "password")
 
     user = %UseIndie.Auth.User{
+      is_active: true,
       full_name: "Ya Boi Smith",
       username: sequence("user"),
       email: sequence(:email, &"email-#{&1}@example.com"),

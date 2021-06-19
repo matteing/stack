@@ -1,0 +1,13 @@
+{
+  "skip_files": [
+    "test/*",
+    "lib/useindie_web/gettext.ex",
+    "lib/useindie_web/endpoint.ex",
+    "lib/useindie_web/router.ex",
+    "lib/useindie_web/telemetry.ex",
+    "lib/useindie_web.ex",
+    "lib/useindie.ex",
+    "lib/useindie/repo.ex",
+    "lib/useindie/application.ex"
+  ]
+}

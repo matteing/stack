@@ -9,12 +9,16 @@ defmodule UseIndieWeb.AuthControllerTest do
   @correct_credentials %{email: "test0@test0.local", password: "test000"}
   @incorrect_credentials %{email: "incorrect", password: "incorrect"}
 
-  def fixture(:user) do
-    insert(:user, email: "test0@test0.local", password: "test000")
+  def fixture(:user, is_active \\ true) do
+    insert(:user, is_active: is_active, email: "test0@test0.local", password: "test000")
   end
 
   def create_user(_) do
     %{user: fixture(:user)}
+  end
+
+  def create_inactive_user(_) do
+    %{user: fixture(:user, false)}
   end
 
   def create_register_params(_) do
@@ -35,6 +39,12 @@ defmodule UseIndieWeb.AuthControllerTest do
 
     test "fails on incorrect credentials", %{conn: conn} do
       conn = post(conn, Routes.auth_path(conn, :login), @incorrect_credentials)
+      assert response(conn, 400)
+    end
+
+    test "rejects inactive users", %{conn: conn, user: user} do
+      Repo.update!(Auth.User.role_changeset(user, %{is_active: false}))
+      conn = post(conn, Routes.auth_path(conn, :login), @correct_credentials)
       assert response(conn, 400)
     end
   end
@@ -75,6 +85,36 @@ defmodule UseIndieWeb.AuthControllerTest do
 
       assert json_response(conn, 201)
       assert Auth.get_user!(json_response(conn, 201)["data"]["id"])
+    end
+  end
+
+  describe "confirmation view" do
+    setup [:create_inactive_user]
+
+    test "activates user account", %{user: user, conn: conn} do
+      {token, user_token} = Auth.UserToken.build_email_token(user, "confirm")
+      Repo.insert!(user_token)
+
+      conn =
+        post(
+          conn,
+          Routes.auth_path(conn, :confirm_email),
+          %{token: token}
+        )
+
+      assert json_response(conn, 200)
+      assert Auth.get_user!(user.id).is_active
+    end
+
+    test "rejects invalid token", %{conn: conn} do
+      conn =
+        post(
+          conn,
+          Routes.auth_path(conn, :confirm_email),
+          %{token: "xxx"}
+        )
+
+      assert json_response(conn, 400)
     end
   end
 

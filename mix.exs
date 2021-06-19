@@ -10,7 +10,8 @@ defmodule UseIndie.MixProject do
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      test_coverage: [tool: ExCoveralls]
     ]
   end
 
@@ -53,7 +54,8 @@ defmodule UseIndie.MixProject do
       {:ex_machina, "~> 2.7.0", only: :test},
       {:bamboo, "~> 2.2.0"},
       {:bcrypt_elixir, "~> 2.0"},
-      {:bamboo_phoenix, "~> 1.0.0"}
+      {:bamboo_phoenix, "~> 1.0.0"},
+      {:excoveralls, "~> 0.10", only: :test}
     ]
   end
 

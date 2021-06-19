@@ -47,7 +47,7 @@ defmodule UseIndieWeb.UserAuth do
   they use the application at all, here would be a good place.
   """
   def require_authenticated_user(conn, _opts) do
-    if conn.assigns[:current_user] do
+    if conn.assigns[:current_user] != nil and conn.assigns[:current_user].is_active do
       conn
     else
       conn

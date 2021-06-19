@@ -99,6 +99,19 @@ defmodule UseIndie.Auth do
   end
 
   @doc """
+  Returns an `%Ecto.Changeset{}` for changing user active status or role.
+
+  ## Examples
+
+      iex> change_user_role(user)
+      %Ecto.Changeset{data: %User{}}
+
+  """
+  def change_user_role(%User{} = user, attrs \\ %{}) do
+    User.role_changeset(user, attrs)
+  end
+
+  @doc """
   Returns an `%Ecto.Changeset{}` for tracking user changes.
 
   ## Examples

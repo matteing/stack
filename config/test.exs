@@ -21,4 +21,7 @@ config :useindie, UseIndieWeb.Endpoint,
 # Print only warnings and errors during test
 config :logger, level: :warn
 
+# https://hexdocs.pm/bcrypt_elixir/Bcrypt.html
+config :bcrypt_elixir, log_rounds: 4
+
 config :useindie, UseIndieWeb.Mailer, adapter: Bamboo.TestAdapter

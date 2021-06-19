@@ -5,13 +5,15 @@ defmodule UseIndie.Auth.User do
 
   @derive {Inspect, except: [:password]}
   schema "users" do
-    field(:email, :string)
-    field(:password, :string, virtual: true)
-    field(:hashed_password, :string)
-    field(:full_name, :string)
-    field(:username, :string)
-    field(:avatar, UseIndieWeb.Uploaders.Avatar.Type)
-    field(:confirmed_at, :naive_datetime)
+    field :is_active, :boolean
+    field :is_staff, :boolean
+    field :email, :string
+    field :password, :string, virtual: true
+    field :hashed_password, :string
+    field :full_name, :string
+    field :username, :string
+    field :avatar, UseIndieWeb.Uploaders.Avatar.Type
+    field :confirmed_at, :naive_datetime
 
     timestamps()
   end
@@ -133,6 +135,15 @@ defmodule UseIndie.Auth.User do
   def confirm_changeset(user) do
     now = NaiveDateTime.utc_now() |> NaiveDateTime.truncate(:second)
     change(user, confirmed_at: now)
+    change(user, is_active: true)
+  end
+
+  @doc """
+  Changes the status or role of any user.
+  """
+  def role_changeset(user, attrs \\ %{}) do
+    user
+    |> cast(attrs, [:is_active, :is_staff])
   end
 
   @doc """

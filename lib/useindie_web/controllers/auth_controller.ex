@@ -26,10 +26,15 @@ defmodule UseIndieWeb.AuthController do
 
   def login(conn, %{"email" => email, "password" => password}) do
     if user = Auth.get_user_by_email_and_password(email, password) do
-      token = get_token(user)
-      render(conn, "login.json", user: user, token: token)
+      if user.is_active do
+        token = get_token(user)
+        render(conn, "login.json", user: user, token: token)
+      else
+        {:error, :bad_request,
+         "Your account is not active. Check your inbox for a confirmation email."}
+      end
     else
-      {:error, :bad_request, "Invalid username or password"}
+      {:error, :bad_request, "Invalid username or password."}
     end
   end
 

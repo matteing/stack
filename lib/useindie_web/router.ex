@@ -29,6 +29,8 @@ defmodule UseIndieWeb.Router do
   # as long as you are also using SSL (which you should anyway).
   if Mix.env() in [:dev, :test] do
     import Phoenix.LiveDashboard.Router
+    # If using Phoenix
+    forward "/sent_emails", Bamboo.SentEmailViewerPlug
 
     scope "/" do
       pipe_through [:fetch_session, :protect_from_forgery]
