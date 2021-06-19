@@ -26,6 +26,9 @@ defmodule UseIndieWeb.Endpoint do
     gzip: false,
     only: ~w(css fonts images js favicon.ico robots.txt)
 
+  # Serve uploads
+  plug Plug.Static, at: "/uploads", from: "uploads/"
+
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
   if code_reloading? do

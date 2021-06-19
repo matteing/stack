@@ -79,6 +79,25 @@ defmodule UseIndie.Auth do
     |> Repo.insert()
   end
 
+  def register_user!(attrs) do
+    %User{}
+    |> User.registration_changeset(attrs)
+    |> Repo.insert!()
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking user profile changes.
+
+  ## Examples
+
+      iex> change_user_profile(user)
+      %Ecto.Changeset{data: %User{}}
+
+  """
+  def change_user_profile(%User{} = user, attrs \\ %{}) do
+    User.profile_changeset(user, attrs)
+  end
+
   @doc """
   Returns an `%Ecto.Changeset{}` for tracking user changes.
 
@@ -219,6 +238,9 @@ defmodule UseIndie.Auth do
   def generate_user_session_token(user) do
     {token, user_token} = UserToken.build_session_token(user)
     Repo.insert!(user_token)
+    # Change to string representation for authorization.
+    # This is a deviation from the mix.phx.gen one
+    # Eventually could switch to Phoenix.Token or JWT
     token
   end
 

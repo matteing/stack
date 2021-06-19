@@ -1,12 +1,23 @@
 defmodule UseIndieWeb.Router do
   use UseIndieWeb, :router
 
+  import UseIndieWeb.UserAuth
+
   pipeline :api do
     plug :accepts, ["json"]
+    plug :fetch_current_user
   end
 
-  scope "/api", UseIndieWeb do
+  scope "/", UseIndieWeb do
     pipe_through :api
+
+    get "/auth", AuthController, :index
+    patch "/auth", AuthController, :update
+    post "/auth/login", AuthController, :login
+    post "/auth/register", AuthController, :register
+    post "/auth/confirm_email", AuthController, :confirm_email
+    post "/auth/forgot_password", AuthController, :forgot_password
+    post "/auth/reset_password", AuthController, :reset_password
   end
 
   # Enables LiveDashboard only for development

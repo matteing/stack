@@ -23,6 +23,7 @@ defmodule UseIndieWeb do
 
       import Plug.Conn
       import UseIndieWeb.Gettext
+      import UseIndieWeb.ControllerHelper
       alias UseIndieWeb.Router.Helpers, as: Routes
     end
   end

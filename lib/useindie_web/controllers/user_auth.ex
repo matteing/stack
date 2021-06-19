@@ -3,21 +3,16 @@ defmodule UseIndieWeb.UserAuth do
 
   alias UseIndie.Auth
 
-  @doc """
-  Logs the user out.
+  def get_token(user) do
+    Auth.generate_user_session_token(user)
+  end
 
-  It clears all session data for safety. See renew_session.
-  """
-  def log_out_user(conn) do
-    user_token = get_session(conn, :user_token)
-    user_token && Auth.delete_session_token(user_token)
+  def delete_token(token) do
+    Auth.delete_session_token(token)
 
-    if live_socket_id = get_session(conn, :live_socket_id) do
-      UseIndieWeb.Endpoint.broadcast(live_socket_id, "disconnect", %{})
-    end
-
-    conn
-    |> renew_session()
+    # if live_socket_id = get_session(conn, :live_socket_id) do
+    #  UseIndieWeb.Endpoint.broadcast(live_socket_id, "disconnect", %{})
+    # end
   end
 
   @doc """
@@ -37,6 +32,8 @@ defmodule UseIndieWeb.UserAuth do
     if conn.assigns[:current_user] do
       conn
       |> put_status(401)
+      |> Phoenix.Controller.put_view(UseIndieWeb.ErrorView)
+      |> Phoenix.Controller.render(:"401")
       |> halt()
     else
       conn
@@ -55,6 +52,8 @@ defmodule UseIndieWeb.UserAuth do
     else
       conn
       |> put_status(401)
+      |> Phoenix.Controller.put_view(UseIndieWeb.ErrorView)
+      |> Phoenix.Controller.render(:"401")
       |> halt()
     end
   end
@@ -64,28 +63,7 @@ defmodule UseIndieWeb.UserAuth do
 
   defp fetch_token([token | _tail]) do
     token
-    |> String.replace("Bearer ", "")
+    |> String.replace("Token ", "")
     |> String.trim()
-  end
-
-  # This function renews the session ID and erases the whole
-  # session to avoid fixation attacks. If there is any data
-  # in the session you may want to preserve after log in/log out,
-  # you must explicitly fetch the session data before clearing
-  # and then immediately set it after clearing, for example:
-  #
-  #     defp renew_session(conn) do
-  #       preferred_locale = get_session(conn, :preferred_locale)
-  #
-  #       conn
-  #       |> configure_session(renew: true)
-  #       |> clear_session()
-  #       |> put_session(:preferred_locale, preferred_locale)
-  #     end
-  #
-  defp renew_session(conn) do
-    conn
-    |> configure_session(renew: true)
-    |> clear_session()
   end
 end

@@ -22,11 +22,19 @@ defmodule UseIndieWeb.FallbackController do
     |> render(:"404")
   end
 
-  # This clause handles authentication errors from Guardian.
+  # This clause handles authentication errors.
   def call(conn, {:error, :unauthorized}) do
     conn
     |> put_status(:unauthorized)
     |> put_view(UseIndieWeb.ErrorView)
-    |> render(:"403")
+    |> render(:"401")
+  end
+
+  # This clause handles any user submission problems.
+  def call(conn, {:error, :bad_request, err}) do
+    conn
+    |> put_status(:bad_request)
+    |> put_view(UseIndieWeb.ErrorView)
+    |> render(:"400", error: err)
   end
 end

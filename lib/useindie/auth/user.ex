@@ -1,18 +1,28 @@
 defmodule UseIndie.Auth.User do
   use Ecto.Schema
+  use Waffle.Ecto.Schema
   import Ecto.Changeset
 
   @derive {Inspect, except: [:password]}
   schema "users" do
-    field :email, :string
-    field :password, :string, virtual: true
-    field :hashed_password, :string
-    field :full_name, :string
-    field :username, :string
-    field :avatar, UseIndieWeb.Uploaders.Avatar.Type
-    field :confirmed_at, :naive_datetime
+    field(:email, :string)
+    field(:password, :string, virtual: true)
+    field(:hashed_password, :string)
+    field(:full_name, :string)
+    field(:username, :string)
+    field(:avatar, UseIndieWeb.Uploaders.Avatar.Type)
+    field(:confirmed_at, :naive_datetime)
 
     timestamps()
+  end
+
+  @doc """
+  A user changeset for updating the user profile fields.
+  """
+  def profile_changeset(user, attrs \\ %{}) do
+    user
+    |> cast(attrs, [:full_name])
+    |> cast_attachments(attrs, [:avatar])
   end
 
   @doc """
@@ -34,7 +44,7 @@ defmodule UseIndie.Auth.User do
   """
   def registration_changeset(user, attrs, opts \\ []) do
     user
-    |> cast(attrs, [:email, :password])
+    |> cast(attrs, [:email, :username, :password])
     |> validate_email()
     |> validate_username()
     |> validate_password(opts)
@@ -52,7 +62,7 @@ defmodule UseIndie.Auth.User do
   defp validate_username(changeset) do
     changeset
     |> validate_required([:username])
-    |> validate_format(:email, ~r/^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$/,
+    |> validate_format(:username, ~r/^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$/,
       message: "must be a valid username"
     )
     |> validate_length(:username, max: 25)
@@ -63,7 +73,7 @@ defmodule UseIndie.Auth.User do
   defp validate_password(changeset, opts) do
     changeset
     |> validate_required([:password])
-    |> validate_length(:password, min: 12, max: 80)
+    |> validate_length(:password, min: 8, max: 80)
     # |> validate_format(:password, ~r/[a-z]/, message: "at least one lower case character")
     # |> validate_format(:password, ~r/[A-Z]/, message: "at least one upper case character")
     # |> validate_format(:password, ~r/[!?@#$%^&*_0-9]/, message: "at least one digit or punctuation character")
