@@ -58,3 +58,5 @@ config :phoenix, :plug_init_mode, :runtime
 
 config :waffle,
   storage: Waffle.Storage.Local
+
+config :useindie, UseIndieWeb.Mailer, adapter: Bamboo.LocalAdapter

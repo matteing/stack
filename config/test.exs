@@ -20,3 +20,5 @@ config :useindie, UseIndieWeb.Endpoint,
 
 # Print only warnings and errors during test
 config :logger, level: :warn
+
+config :useindie, UseIndieWeb.Mailer, adapter: Bamboo.TestAdapter

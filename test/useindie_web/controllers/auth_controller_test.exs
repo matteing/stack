@@ -1,6 +1,6 @@
 defmodule UseIndieWeb.AuthControllerTest do
   use UseIndieWeb.ConnCase, async: true
-  # use Bamboo.Test
+  use Bamboo.Test
 
   import UseIndie.Factory
   alias UseIndie.Auth
@@ -91,7 +91,7 @@ defmodule UseIndieWeb.AuthControllerTest do
 
       user_email = user.email
       assert json_response(conn, 200)
-      # assert_delivered_email_matches(%{to: [{_, ^user_email}]})
+      assert_delivered_email_matches(%{to: [{_, ^user_email}]})
     end
 
     test "doesn't divulge user existence", %{conn: conn, user: user} do
