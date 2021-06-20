@@ -1,7 +1,7 @@
 defmodule UseIndieWeb.Router do
   use UseIndieWeb, :router
 
-  import UseIndieWeb.UserAuth
+  import UseIndieWeb.Auth
 
   pipeline :api do
     plug :accepts, ["json"]

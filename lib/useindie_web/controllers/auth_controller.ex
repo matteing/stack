@@ -3,7 +3,7 @@ defmodule UseIndieWeb.AuthController do
 
   alias UseIndie.Auth
   alias UseIndie.Repo
-  import UseIndieWeb.UserAuth
+  import UseIndieWeb.Auth
 
   action_fallback UseIndieWeb.FallbackController
 

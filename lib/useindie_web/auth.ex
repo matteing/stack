@@ -1,4 +1,4 @@
-defmodule UseIndieWeb.UserAuth do
+defmodule UseIndieWeb.Auth do
   import Plug.Conn
 
   alias UseIndie.Auth
