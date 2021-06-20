@@ -58,6 +58,24 @@ defmodule UseIndieWeb.Auth do
     end
   end
 
+  @doc """
+  Used for routes that require the user to be authenticated and staff.
+
+  If you want to enforce the user email is confirmed before
+  they use the application at all, here would be a good place.
+  """
+  def require_staff_user(conn, _opts) do
+    if conn.assigns[:current_user] != nil and conn.assigns[:current_user].is_staff do
+      conn
+    else
+      conn
+      |> put_status(401)
+      |> Phoenix.Controller.put_view(UseIndieWeb.ErrorView)
+      |> Phoenix.Controller.render(:"401")
+      |> halt()
+    end
+  end
+
   # Taken from https://github.com/bobbypriambodo/phoenix_token_plug/blob/master/lib/phoenix_token_plug/verify_header.ex
   defp fetch_token([]), do: nil
 

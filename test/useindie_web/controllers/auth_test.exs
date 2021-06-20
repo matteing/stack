@@ -1,7 +1,9 @@
-defmodule UseIndieWeb.AuthUserTest do
+defmodule UseIndieWeb.AuthTest do
   use UseIndieWeb.ConnCase, async: true
 
   import UseIndie.Factory
+  alias UseIndie.Repo
+  alias UseIndie.Auth.User
   alias UseIndieWeb.Auth
 
   def fixture(:user, is_active \\ true) do
@@ -87,6 +89,44 @@ defmodule UseIndieWeb.AuthUserTest do
         |> get("/auth/")
         |> assign(:current_user, user)
         |> Auth.require_authenticated_user([])
+
+      refute conn.halted
+    end
+  end
+
+  describe "require_staff_user/2" do
+    setup [:create_user]
+
+    test "rejects guest users", %{conn: conn} do
+      conn =
+        conn
+        |> bypass_through(UseIndieWeb.Router, :api)
+        |> get("/auth/")
+        |> Auth.require_staff_user([])
+
+      assert conn.halted
+    end
+
+    test "rejects authenticated users", %{conn: conn, user: user} do
+      conn =
+        conn
+        |> bypass_through(UseIndieWeb.Router, :api)
+        |> get("/auth/")
+        |> assign(:current_user, user)
+        |> Auth.require_staff_user([])
+
+      assert conn.halted
+    end
+
+    test "accepts staff users", %{conn: conn, user: user} do
+      user = Repo.update!(User.role_changeset(user, %{is_staff: true}))
+
+      conn =
+        conn
+        |> bypass_through(UseIndieWeb.Router, :api)
+        |> get("/auth/")
+        |> assign(:current_user, user)
+        |> Auth.require_staff_user([])
 
       refute conn.halted
     end
