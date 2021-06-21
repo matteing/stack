@@ -1,0 +1,38 @@
+{
+	"name": "app",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"lint": "next lint"
+	},
+	"dependencies": {
+		"@moxy/next-layout": "^2.2.3",
+		"axios": "^0.21.1",
+		"concurrently": "^6.2.0",
+		"debug": "^4.3.1",
+		"next": "11.0.0",
+		"next-auth": "^3.27.0",
+		"react": "17.0.2",
+		"react-dom": "17.0.2"
+	},
+	"devDependencies": {
+		"@babel/eslint-parser": "^7.14.5",
+		"autoprefixer": "^10.2.6",
+		"eslint": "7.29.0",
+		"eslint-config-next": "11.0.0",
+		"eslint-plugin-lodash": "^7.2.0",
+		"eslint-plugin-react": "^7.24.0",
+		"eslint-plugin-react-hooks": "^4.2.0",
+		"eslint-plugin-tailwind": "^0.2.1",
+		"lint-staged": "^11.0.0",
+		"postcss": "^8.3.5",
+		"tailwindcss": "^2.2.2"
+	},
+	"prettier": {
+		"tabWidth": 4,
+		"useTabs": true
+	}
+}

@@ -68,3 +68,4 @@ app/.npm
 # Optional REPL history
 app/.node_repl_history
 app/.next
+app/.env
