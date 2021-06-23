@@ -4,15 +4,15 @@ import Shell from "components/layouts/Shell";
 import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
-  return (
-    <Provider session={pageProps.session}>
-      <LayoutTree
-        Component={Component}
-        pageProps={pageProps}
-        defaultProps={<Shell />}
-      />
-    </Provider>
-  );
+	return (
+		<Provider session={pageProps.session}>
+			<LayoutTree
+				Component={Component}
+				pageProps={pageProps}
+				defaultLayout={<Shell />}
+			/>
+		</Provider>
+	);
 }
 
 export default MyApp;
