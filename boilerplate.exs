@@ -44,7 +44,7 @@ defmodule BoilerplateSetup do
       |> String.replace("BoilerName", module_name, global: true)
       |> String.replace("boilername", otp_name, global: true)
 
-    IO.puts("writing ${file}")
+    IO.puts("writing #{file}")
     File.write!(file, replaced_content)
   end
 
@@ -52,7 +52,7 @@ defmodule BoilerplateSetup do
     paths = Enum.map(files, &Path.dirname/1)
 
     Enum.each(paths, fn path ->
-      IO.puts("renaming ${path}")
+      IO.puts("renaming #{path}")
       new_path = String.replace(path, "boilername", otp_name, global: true)
       File.mkdir_p!(new_path)
       File.rename!(path, new_path)
