@@ -14,7 +14,7 @@ dev:
 		-n api,app \
 		"mix phx.server" \
 		"npm run dev --prefix ./app" \
-		-c "bgBlue.bold,bgMagenta.bold"
+		-c "bgGreen.bold,bgCyan.bold"
 
 app:
 	cd app; npm run dev
