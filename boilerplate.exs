@@ -61,8 +61,7 @@ defmodule BoilerplateSetup do
   end
 
   def cleanup() do
-    Enum.each(@to_delete, &IO.puts/1)
-    # Enum.each(@to_delete, &File.rm_rf!/1)
+    Enum.each(@to_delete, &File.rm_rf!/1)
   end
 
   defp random_string(length) when length > 31 do
