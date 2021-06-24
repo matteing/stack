@@ -2,6 +2,12 @@
 
 This is my boilerplate for new Elixir/Phoenix-based applications. It includes a fully functional authentication system, integration with Next.js and common utilities like a mailer and API routes.
 
+## Quick start
+
+```
+FOLDER=project git --git-dir=/dev/null clone --depth=1 https://github.com/matteing/elixir-boilerplate $FOLDER; cd $FOLDER; make install
+```
+
 ## Installation
 
 To setup this boilerplate:
