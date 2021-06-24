@@ -1,6 +1,6 @@
 defmodule BoilerName.Auth.UserNotifier do
-  alias UseIndieWeb.Mailer
-  alias UseIndieWeb.Email
+  alias BoilerNameWeb.Mailer
+  alias BoilerNameWeb.Email
 
   @doc """
   Deliver instructions to confirm account.

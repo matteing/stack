@@ -1,5 +1,5 @@
-defmodule UseIndieWeb.LayoutView do
-  use UseIndieWeb, :view
+defmodule BoilerNameWeb.LayoutView do
+  use BoilerNameWeb, :view
 
   def email do
   end

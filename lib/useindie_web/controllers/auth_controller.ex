@@ -1,11 +1,11 @@
-defmodule UseIndieWeb.AuthController do
-  use UseIndieWeb, :controller
+defmodule BoilerNameWeb.AuthController do
+  use BoilerNameWeb, :controller
 
   alias BoilerName.Auth
   alias BoilerName.Repo
-  import UseIndieWeb.Auth
+  import BoilerNameWeb.Auth
 
-  action_fallback UseIndieWeb.FallbackController
+  action_fallback BoilerNameWeb.FallbackController
 
   plug :require_authenticated_user when action in [:index, :update]
   plug :require_guest_user when action in [:login, :register]
@@ -89,14 +89,14 @@ defmodule UseIndieWeb.AuthController do
       else
         conn
         |> put_status(401)
-        |> put_view(UseIndieWeb.ErrorView)
+        |> put_view(BoilerNameWeb.ErrorView)
         |> render(:"401")
         |> halt()
       end
     else
       conn
       |> put_status(401)
-      |> put_view(UseIndieWeb.ErrorView)
+      |> put_view(BoilerNameWeb.ErrorView)
       |> render(:"401")
       |> halt()
     end

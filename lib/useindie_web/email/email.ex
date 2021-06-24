@@ -1,5 +1,5 @@
-defmodule UseIndieWeb.Email do
-  use Bamboo.Phoenix, view: UseIndieWeb.EmailView
+defmodule BoilerNameWeb.Email do
+  use Bamboo.Phoenix, view: BoilerNameWeb.EmailView
 
   def confirmation_email(token, user) do
     base_email()
@@ -22,6 +22,6 @@ defmodule UseIndieWeb.Email do
   def base_email do
     new_email()
     |> from("hey@boilername.com")
-    |> put_html_layout({UseIndieWeb.LayoutView, "email.html"})
+    |> put_html_layout({BoilerNameWeb.LayoutView, "email.html"})
   end
 end

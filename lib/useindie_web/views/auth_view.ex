@@ -1,6 +1,6 @@
-defmodule UseIndieWeb.AuthView do
-  use UseIndieWeb, :view
-  alias UseIndieWeb.AuthView
+defmodule BoilerNameWeb.AuthView do
+  use BoilerNameWeb, :view
+  alias BoilerNameWeb.AuthView
 
   def render("index.json", %{user: user}) do
     %{data: render_one(user, AuthView, "privileged_user.json", as: :user)}
@@ -55,7 +55,7 @@ defmodule UseIndieWeb.AuthView do
       username: user.username,
       email: user.email,
       full_name: user.full_name,
-      avatar: UseIndieWeb.Uploaders.Avatar.url({user.avatar, user}, :thumb)
+      avatar: BoilerNameWeb.Uploaders.Avatar.url({user.avatar, user}, :thumb)
     }
   end
 end

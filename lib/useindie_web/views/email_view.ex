@@ -1,3 +1,3 @@
-defmodule UseIndieWeb.EmailView do
-  use UseIndieWeb, :view
+defmodule BoilerNameWeb.EmailView do
+  use BoilerNameWeb, :view
 end

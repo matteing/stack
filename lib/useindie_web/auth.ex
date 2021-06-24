@@ -1,4 +1,4 @@
-defmodule UseIndieWeb.Auth do
+defmodule BoilerNameWeb.Auth do
   import Plug.Conn
 
   alias BoilerName.Auth
@@ -11,7 +11,7 @@ defmodule UseIndieWeb.Auth do
     Auth.delete_session_token(token)
 
     # if live_socket_id = get_session(conn, :live_socket_id) do
-    #  UseIndieWeb.Endpoint.broadcast(live_socket_id, "disconnect", %{})
+    #  BoilerNameWeb.Endpoint.broadcast(live_socket_id, "disconnect", %{})
     # end
   end
 
@@ -32,7 +32,7 @@ defmodule UseIndieWeb.Auth do
     if conn.assigns[:current_user] do
       conn
       |> put_status(401)
-      |> Phoenix.Controller.put_view(UseIndieWeb.ErrorView)
+      |> Phoenix.Controller.put_view(BoilerNameWeb.ErrorView)
       |> Phoenix.Controller.render(:"401")
       |> halt()
     else
@@ -52,7 +52,7 @@ defmodule UseIndieWeb.Auth do
     else
       conn
       |> put_status(401)
-      |> Phoenix.Controller.put_view(UseIndieWeb.ErrorView)
+      |> Phoenix.Controller.put_view(BoilerNameWeb.ErrorView)
       |> Phoenix.Controller.render(:"401")
       |> halt()
     end
@@ -70,7 +70,7 @@ defmodule UseIndieWeb.Auth do
     else
       conn
       |> put_status(401)
-      |> Phoenix.Controller.put_view(UseIndieWeb.ErrorView)
+      |> Phoenix.Controller.put_view(BoilerNameWeb.ErrorView)
       |> Phoenix.Controller.render(:"401")
       |> halt()
     end

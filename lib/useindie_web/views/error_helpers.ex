@@ -1,4 +1,4 @@
-defmodule UseIndieWeb.ErrorHelpers do
+defmodule BoilerNameWeb.ErrorHelpers do
   @moduledoc """
   Conveniences for translating and building error messages.
   """
@@ -25,9 +25,9 @@ defmodule UseIndieWeb.ErrorHelpers do
     # should be written to the errors.po file. The :count option is
     # set by Ecto and indicates we should also apply plural rules.
     if count = opts[:count] do
-      Gettext.dngettext(UseIndieWeb.Gettext, "errors", msg, msg, count, opts)
+      Gettext.dngettext(BoilerNameWeb.Gettext, "errors", msg, msg, count, opts)
     else
-      Gettext.dgettext(UseIndieWeb.Gettext, "errors", msg, opts)
+      Gettext.dgettext(BoilerNameWeb.Gettext, "errors", msg, opts)
     end
   end
 end

@@ -4,7 +4,7 @@ use Mix.Config
 config :boilername, BoilerName.Repo,
   username: "postgres",
   password: "postgres",
-  database: "useindie_dev",
+  database: "boilername_dev",
   hostname: "localhost",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
@@ -15,7 +15,7 @@ config :boilername, BoilerName.Repo,
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
 # with webpack to recompile .js and .css sources.
-config :boilername, UseIndieWeb.Endpoint,
+config :boilername, BoilerNameWeb.Endpoint,
   http: [port: 4000],
   debug_errors: true,
   code_reloader: true,
@@ -59,4 +59,4 @@ config :phoenix, :plug_init_mode, :runtime
 config :waffle,
   storage: Waffle.Storage.Local
 
-config :boilername, UseIndieWeb.Mailer, adapter: Bamboo.LocalAdapter
+config :boilername, BoilerNameWeb.Mailer, adapter: Bamboo.LocalAdapter

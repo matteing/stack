@@ -10,11 +10,11 @@ defmodule BoilerName.Application do
       # Start the Ecto repository
       BoilerName.Repo,
       # Start the Telemetry supervisor
-      UseIndieWeb.Telemetry,
+      BoilerNameWeb.Telemetry,
       # Start the PubSub system
       {Phoenix.PubSub, name: BoilerName.PubSub},
       # Start the Endpoint (http/https)
-      UseIndieWeb.Endpoint
+      BoilerNameWeb.Endpoint
       # Start a worker by calling: BoilerName.Worker.start_link(arg)
       # {BoilerName.Worker, arg}
     ]
@@ -28,7 +28,7 @@ defmodule BoilerName.Application do
   # Tell Phoenix to update the endpoint configuration
   # whenever the application is updated.
   def config_change(changed, _new, removed) do
-    UseIndieWeb.Endpoint.config_change(changed, removed)
+    BoilerNameWeb.Endpoint.config_change(changed, removed)
     :ok
   end
 end

@@ -1,4 +1,4 @@
-defmodule UseIndieWeb.Endpoint do
+defmodule BoilerNameWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :boilername
 
   # The session will be stored in the cookie and signed,
@@ -6,11 +6,11 @@ defmodule UseIndieWeb.Endpoint do
   # Set :encryption_salt if you would also like to encrypt it.
   @session_options [
     store: :cookie,
-    key: "_useindie_key",
+    key: "_boilername_key",
     signing_salt: "qGlSdizz"
   ]
 
-  socket "/socket", UseIndieWeb.UserSocket,
+  socket "/socket", BoilerNameWeb.UserSocket,
     websocket: true,
     longpoll: false
 
@@ -51,5 +51,5 @@ defmodule UseIndieWeb.Endpoint do
   plug Plug.MethodOverride
   plug Plug.Head
   plug Plug.Session, @session_options
-  plug UseIndieWeb.Router
+  plug BoilerNameWeb.Router
 end

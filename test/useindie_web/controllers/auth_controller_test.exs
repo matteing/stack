@@ -1,5 +1,5 @@
-defmodule UseIndieWeb.AuthControllerTest do
-  use UseIndieWeb.ConnCase, async: true
+defmodule BoilerNameWeb.AuthControllerTest do
+  use BoilerNameWeb.ConnCase, async: true
   use Bamboo.Test
 
   import BoilerName.Factory

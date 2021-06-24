@@ -1,16 +1,16 @@
-defmodule UseIndieWeb.FallbackController do
+defmodule BoilerNameWeb.FallbackController do
   @moduledoc """
   Translates controller action results into valid `Plug.Conn` responses.
 
   See `Phoenix.Controller.action_fallback/1` for more details.
   """
-  use UseIndieWeb, :controller
+  use BoilerNameWeb, :controller
 
   # This clause handles errors returned by Ecto's insert/update/delete.
   def call(conn, {:error, %Ecto.Changeset{} = changeset}) do
     conn
     |> put_status(:unprocessable_entity)
-    |> put_view(UseIndieWeb.ChangesetView)
+    |> put_view(BoilerNameWeb.ChangesetView)
     |> render("error.json", changeset: changeset)
   end
 
@@ -18,7 +18,7 @@ defmodule UseIndieWeb.FallbackController do
   def call(conn, {:error, :not_found}) do
     conn
     |> put_status(:not_found)
-    |> put_view(UseIndieWeb.ErrorView)
+    |> put_view(BoilerNameWeb.ErrorView)
     |> render(:"404")
   end
 
@@ -26,7 +26,7 @@ defmodule UseIndieWeb.FallbackController do
   def call(conn, {:error, :unauthorized}) do
     conn
     |> put_status(:unauthorized)
-    |> put_view(UseIndieWeb.ErrorView)
+    |> put_view(BoilerNameWeb.ErrorView)
     |> render(:"401")
   end
 
@@ -34,7 +34,7 @@ defmodule UseIndieWeb.FallbackController do
   def call(conn, {:error, :bad_request, err}) do
     conn
     |> put_status(:bad_request)
-    |> put_view(UseIndieWeb.ErrorView)
+    |> put_view(BoilerNameWeb.ErrorView)
     |> render(:"400", error: err)
   end
 end

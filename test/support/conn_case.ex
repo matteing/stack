@@ -1,4 +1,4 @@
-defmodule UseIndieWeb.ConnCase do
+defmodule BoilerNameWeb.ConnCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require setting up a connection.
@@ -11,7 +11,7 @@ defmodule UseIndieWeb.ConnCase do
   we enable the SQL sandbox, so changes done to the database
   are reverted at the end of every test. If you are using
   PostgreSQL, you can even run database tests asynchronously
-  by setting `use UseIndieWeb.ConnCase, async: true`, although
+  by setting `use BoilerNameWeb.ConnCase, async: true`, although
   this option is not recommended for other databases.
   """
 
@@ -22,12 +22,12 @@ defmodule UseIndieWeb.ConnCase do
       # Import conveniences for testing with connections
       import Plug.Conn
       import Phoenix.ConnTest
-      import UseIndieWeb.ConnCase
+      import BoilerNameWeb.ConnCase
 
-      alias UseIndieWeb.Router.Helpers, as: Routes
+      alias BoilerNameWeb.Router.Helpers, as: Routes
 
       # The default endpoint for testing
-      @endpoint UseIndieWeb.Endpoint
+      @endpoint BoilerNameWeb.Endpoint
     end
   end
 

@@ -1,5 +1,5 @@
-defmodule UseIndieWeb.ErrorView do
-  use UseIndieWeb, :view
+defmodule BoilerNameWeb.ErrorView do
+  use BoilerNameWeb, :view
 
   # If you want to customize a particular status code
   # for a certain format, you may uncomment below.

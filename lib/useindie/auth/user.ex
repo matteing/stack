@@ -12,7 +12,7 @@ defmodule BoilerName.Auth.User do
     field :hashed_password, :string
     field :full_name, :string
     field :username, :string
-    field :avatar, UseIndieWeb.Uploaders.Avatar.Type
+    field :avatar, BoilerNameWeb.Uploaders.Avatar.Type
     field :confirmed_at, :naive_datetime
 
     timestamps()

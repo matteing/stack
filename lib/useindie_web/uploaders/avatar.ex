@@ -1,4 +1,4 @@
-defmodule UseIndieWeb.Uploaders.Avatar do
+defmodule BoilerNameWeb.Uploaders.Avatar do
   use Waffle.Definition
 
   # Include ecto support (requires package waffle_ecto installed):

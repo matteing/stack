@@ -1,10 +1,10 @@
-defmodule UseIndieWeb.AuthTest do
-  use UseIndieWeb.ConnCase, async: true
+defmodule BoilerNameWeb.AuthTest do
+  use BoilerNameWeb.ConnCase, async: true
 
   import BoilerName.Factory
   alias BoilerName.Repo
   alias BoilerName.Auth.User
-  alias UseIndieWeb.Auth
+  alias BoilerNameWeb.Auth
 
   def fixture(:user, is_active \\ true) do
     insert(:user, is_active: is_active, email: "test0@test0.local", password: "test000")
@@ -50,7 +50,7 @@ defmodule UseIndieWeb.AuthTest do
     test "rejects authenticated users", %{conn: conn, user: user} do
       conn =
         conn
-        |> bypass_through(UseIndieWeb.Router, :api)
+        |> bypass_through(BoilerNameWeb.Router, :api)
         |> get("/auth/")
         |> assign(:current_user, user)
         |> Auth.require_guest_user([])
@@ -61,7 +61,7 @@ defmodule UseIndieWeb.AuthTest do
     test "accepts guest users", %{conn: conn} do
       conn =
         conn
-        |> bypass_through(UseIndieWeb.Router, :api)
+        |> bypass_through(BoilerNameWeb.Router, :api)
         |> get("/auth/")
         |> Auth.require_guest_user([])
 
@@ -75,7 +75,7 @@ defmodule UseIndieWeb.AuthTest do
     test "rejects guest users", %{conn: conn} do
       conn =
         conn
-        |> bypass_through(UseIndieWeb.Router, :api)
+        |> bypass_through(BoilerNameWeb.Router, :api)
         |> get("/auth/")
         |> Auth.require_authenticated_user([])
 
@@ -85,7 +85,7 @@ defmodule UseIndieWeb.AuthTest do
     test "accepts authenticated users", %{conn: conn, user: user} do
       conn =
         conn
-        |> bypass_through(UseIndieWeb.Router, :api)
+        |> bypass_through(BoilerNameWeb.Router, :api)
         |> get("/auth/")
         |> assign(:current_user, user)
         |> Auth.require_authenticated_user([])
@@ -100,7 +100,7 @@ defmodule UseIndieWeb.AuthTest do
     test "rejects guest users", %{conn: conn} do
       conn =
         conn
-        |> bypass_through(UseIndieWeb.Router, :api)
+        |> bypass_through(BoilerNameWeb.Router, :api)
         |> get("/auth/")
         |> Auth.require_staff_user([])
 
@@ -110,7 +110,7 @@ defmodule UseIndieWeb.AuthTest do
     test "rejects authenticated users", %{conn: conn, user: user} do
       conn =
         conn
-        |> bypass_through(UseIndieWeb.Router, :api)
+        |> bypass_through(BoilerNameWeb.Router, :api)
         |> get("/auth/")
         |> assign(:current_user, user)
         |> Auth.require_staff_user([])
@@ -123,7 +123,7 @@ defmodule UseIndieWeb.AuthTest do
 
       conn =
         conn
-        |> bypass_through(UseIndieWeb.Router, :api)
+        |> bypass_through(BoilerNameWeb.Router, :api)
         |> get("/auth/")
         |> assign(:current_user, user)
         |> Auth.require_staff_user([])

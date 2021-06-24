@@ -12,10 +12,10 @@ config :boilername,
   ecto_repos: [BoilerName.Repo]
 
 # Configures the endpoint
-config :boilername, UseIndieWeb.Endpoint,
+config :boilername, BoilerNameWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "SECRET_FOR_DEV_GOES_HERE",
-  render_errors: [view: UseIndieWeb.ErrorView, accepts: ~w(json), layout: false],
+  render_errors: [view: BoilerNameWeb.ErrorView, accepts: ~w(json), layout: false],
   pubsub_server: BoilerName.PubSub,
   live_view: [signing_salt: "SIGNING_SALT_GOES_HERE"]
 

@@ -1,5 +1,5 @@
-defmodule UseIndieWeb.ChangesetView do
-  use UseIndieWeb, :view
+defmodule BoilerNameWeb.ChangesetView do
+  use BoilerNameWeb, :view
 
   @doc """
   Traverses and translates changeset errors.

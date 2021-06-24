@@ -1,14 +1,14 @@
-defmodule UseIndieWeb.Router do
-  use UseIndieWeb, :router
+defmodule BoilerNameWeb.Router do
+  use BoilerNameWeb, :router
 
-  import UseIndieWeb.Auth
+  import BoilerNameWeb.Auth
 
   pipeline :api do
     plug :accepts, ["json"]
     plug :fetch_current_user
   end
 
-  scope "/", UseIndieWeb do
+  scope "/", BoilerNameWeb do
     pipe_through :api
 
     get "/auth", AuthController, :index
@@ -34,7 +34,7 @@ defmodule UseIndieWeb.Router do
 
     scope "/" do
       pipe_through [:fetch_session, :protect_from_forgery]
-      live_dashboard "/dashboard", metrics: UseIndieWeb.Telemetry
+      live_dashboard "/dashboard", metrics: BoilerNameWeb.Telemetry
     end
   end
 end

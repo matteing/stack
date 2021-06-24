@@ -1,11 +1,11 @@
 {
   "skip_files": [
     "test/*",
-    "lib/useindie_web/gettext.ex",
-    "lib/useindie_web/endpoint.ex",
-    "lib/useindie_web/router.ex",
-    "lib/useindie_web/telemetry.ex",
-    "lib/useindie_web.ex",
+    "lib/boilername_web/gettext.ex",
+    "lib/boilername_web/endpoint.ex",
+    "lib/boilername_web/router.ex",
+    "lib/boilername_web/telemetry.ex",
+    "lib/boilername_web.ex",
     "lib/boilername.ex",
     "lib/boilername/repo.ex",
     "lib/boilername/application.ex"
