@@ -3,11 +3,11 @@ SHELL := /bin/bash
 CONCURRENTLY := ./app/node_modules/.bin/concurrently
 
 install:
-	mix deps.get
-	mix setup
-	cd app; npm install
-	mix test
 	[ -f ./boilerplate.exs ] && elixir boilerplate.exs
+	mix deps.get
+	cd app; npm install
+	mix ecto.create
+	mix test
 
 dev:
 	$(CONCURRENTLY) \
