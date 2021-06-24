@@ -1,10 +1,10 @@
-defmodule UseIndie.Factory do
-  use ExMachina.Ecto, repo: UseIndie.Repo
+defmodule BoilerName.Factory do
+  use ExMachina.Ecto, repo: BoilerName.Repo
 
   def user_factory(attrs) do
     password = Map.get(attrs, :password, "password")
 
-    user = %UseIndie.Auth.User{
+    user = %BoilerName.Auth.User{
       is_active: true,
       full_name: "Ya Boi Smith",
       username: sequence("user"),

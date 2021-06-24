@@ -1,9 +1,9 @@
 defmodule UseIndieWeb.AuthTest do
   use UseIndieWeb.ConnCase, async: true
 
-  import UseIndie.Factory
-  alias UseIndie.Repo
-  alias UseIndie.Auth.User
+  import BoilerName.Factory
+  alias BoilerName.Repo
+  alias BoilerName.Auth.User
   alias UseIndieWeb.Auth
 
   def fixture(:user, is_active \\ true) do

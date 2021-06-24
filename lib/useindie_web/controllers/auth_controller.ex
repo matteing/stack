@@ -1,8 +1,8 @@
 defmodule UseIndieWeb.AuthController do
   use UseIndieWeb, :controller
 
-  alias UseIndie.Auth
-  alias UseIndie.Repo
+  alias BoilerName.Auth
+  alias BoilerName.Repo
   import UseIndieWeb.Auth
 
   action_fallback UseIndieWeb.FallbackController

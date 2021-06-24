@@ -1,13 +1,13 @@
 defmodule BoilerplateSetup do
   @folders ~w(lib test priv config)
   @extra_files ["./mix.exs", "coveralls.json"]
-  @to_delete ["./lib/useindie", "./lib/useindie_web", "./boilerplate.exs"]
+  @to_delete ["./lib/boilername", "./lib/boilername_web", "./boilerplate.exs"]
 
   def main() do
     IO.puts("--> Welcome to the boilerplate setup")
     files = List.flatten(Enum.map(@folders, &traverse_path/1)) ++ @extra_files
-    module_name = String.trim(IO.gets("App name (e.g. UseIndie): "))
-    otp_name = String.trim(IO.gets("OTP name, underscored (e.g. useindie): "))
+    module_name = String.trim(IO.gets("App name (e.g. BoilerName): "))
+    otp_name = String.trim(IO.gets("OTP name, underscored (e.g. boilername): "))
 
     if module_name == "" or otp_name == "" do
       System.halt()
@@ -39,12 +39,12 @@ defmodule BoilerplateSetup do
   def process_file(file, %{:module_name => module_name, :otp_name => otp_name}) do
     replaced_content =
       File.read!(file)
-      |> String.replace("UseIndie", module_name, global: true)
-      |> String.replace("useindie", otp_name, global: true)
+      |> String.replace("BoilerName", module_name, global: true)
+      |> String.replace("boilername", otp_name, global: true)
 
     replaced_name =
       file
-      |> String.replace("useindie", otp_name, global: true)
+      |> String.replace("boilername", otp_name, global: true)
 
     File.write!(file, replaced_content)
     File.mkdir_p!(replaced_name |> Path.dirname())
@@ -62,7 +62,7 @@ defmodule BoilerplateSetup do
 
   def cleanup() do
     Enum.each(@to_delete, &IO.puts/1)
-    # Enum.each(@to_delete, &File.rm!/1)
+    # Enum.each(@to_delete, &File.rm_rf!/1)
   end
 
   defp random_string(length) when length > 31 do

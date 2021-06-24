@@ -1,7 +1,7 @@
 defmodule UseIndieWeb.Auth do
   import Plug.Conn
 
-  alias UseIndie.Auth
+  alias BoilerName.Auth
 
   def get_token(user) do
     Auth.generate_user_session_token(user)

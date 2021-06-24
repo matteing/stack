@@ -1,4 +1,4 @@
-defmodule UseIndie.Application do
+defmodule BoilerName.Application do
   # See https://hexdocs.pm/elixir/Application.html
   # for more information on OTP Applications
   @moduledoc false
@@ -8,20 +8,20 @@ defmodule UseIndie.Application do
   def start(_type, _args) do
     children = [
       # Start the Ecto repository
-      UseIndie.Repo,
+      BoilerName.Repo,
       # Start the Telemetry supervisor
       UseIndieWeb.Telemetry,
       # Start the PubSub system
-      {Phoenix.PubSub, name: UseIndie.PubSub},
+      {Phoenix.PubSub, name: BoilerName.PubSub},
       # Start the Endpoint (http/https)
       UseIndieWeb.Endpoint
-      # Start a worker by calling: UseIndie.Worker.start_link(arg)
-      # {UseIndie.Worker, arg}
+      # Start a worker by calling: BoilerName.Worker.start_link(arg)
+      # {BoilerName.Worker, arg}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: UseIndie.Supervisor]
+    opts = [strategy: :one_for_one, name: BoilerName.Supervisor]
     Supervisor.start_link(children, opts)
   end
 

@@ -6,8 +6,8 @@
     "lib/useindie_web/router.ex",
     "lib/useindie_web/telemetry.ex",
     "lib/useindie_web.ex",
-    "lib/useindie.ex",
-    "lib/useindie/repo.ex",
-    "lib/useindie/application.ex"
+    "lib/boilername.ex",
+    "lib/boilername/repo.ex",
+    "lib/boilername/application.ex"
   ]
 }

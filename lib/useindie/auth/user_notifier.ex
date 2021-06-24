@@ -1,4 +1,4 @@
-defmodule UseIndie.Auth.UserNotifier do
+defmodule BoilerName.Auth.UserNotifier do
   alias UseIndieWeb.Mailer
   alias UseIndieWeb.Email
 

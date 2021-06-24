@@ -1,4 +1,4 @@
-defmodule UseIndie.Auth.UserToken do
+defmodule BoilerName.Auth.UserToken do
   use Ecto.Schema
   import Ecto.Query
 
@@ -16,7 +16,7 @@ defmodule UseIndie.Auth.UserToken do
     field :token, :binary
     field :context, :string
     field :sent_to, :string
-    belongs_to :user, UseIndie.Auth.User
+    belongs_to :user, BoilerName.Auth.User
 
     timestamps(updated_at: false)
   end
@@ -28,7 +28,7 @@ defmodule UseIndie.Auth.UserToken do
   """
   def build_session_token(user) do
     token = Base.url_encode64(:crypto.strong_rand_bytes(@rand_size), padding: false)
-    {token, %UseIndie.Auth.UserToken{token: token, context: "session", user_id: user.id}}
+    {token, %BoilerName.Auth.UserToken{token: token, context: "session", user_id: user.id}}
   end
 
   @doc """
@@ -63,7 +63,7 @@ defmodule UseIndie.Auth.UserToken do
     hashed_token = :crypto.hash(@hash_algorithm, token)
 
     {Base.url_encode64(token, padding: false),
-     %UseIndie.Auth.UserToken{
+     %BoilerName.Auth.UserToken{
        token: hashed_token,
        context: context,
        sent_to: sent_to,
@@ -123,17 +123,17 @@ defmodule UseIndie.Auth.UserToken do
   Returns the given token with the given context.
   """
   def token_and_context_query(token, context) do
-    from UseIndie.Auth.UserToken, where: [token: ^token, context: ^context]
+    from BoilerName.Auth.UserToken, where: [token: ^token, context: ^context]
   end
 
   @doc """
   Gets all tokens for the given user for the given contexts.
   """
   def user_and_contexts_query(user, :all) do
-    from t in UseIndie.Auth.UserToken, where: t.user_id == ^user.id
+    from t in BoilerName.Auth.UserToken, where: t.user_id == ^user.id
   end
 
   def user_and_contexts_query(user, [_ | _] = contexts) do
-    from t in UseIndie.Auth.UserToken, where: t.user_id == ^user.id and t.context in ^contexts
+    from t in BoilerName.Auth.UserToken, where: t.user_id == ^user.id and t.context in ^contexts
   end
 end

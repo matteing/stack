@@ -1,5 +1,5 @@
 defmodule UseIndieWeb.Endpoint do
-  use Phoenix.Endpoint, otp_app: :useindie
+  use Phoenix.Endpoint, otp_app: :boilername
 
   # The session will be stored in the cookie and signed,
   # this means its contents can be read but not tampered with.
@@ -22,7 +22,7 @@ defmodule UseIndieWeb.Endpoint do
   # when deploying your static files in production.
   plug Plug.Static,
     at: "/",
-    from: :useindie,
+    from: :boilername,
     gzip: false,
     only: ~w(css fonts images js favicon.ico robots.txt)
 
@@ -33,7 +33,7 @@ defmodule UseIndieWeb.Endpoint do
   # :code_reloader configuration of your endpoint.
   if code_reloading? do
     plug Phoenix.CodeReloader
-    plug Phoenix.Ecto.CheckRepoStatus, otp_app: :useindie
+    plug Phoenix.Ecto.CheckRepoStatus, otp_app: :boilername
   end
 
   plug Phoenix.LiveDashboard.RequestLogger,

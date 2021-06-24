@@ -5,7 +5,7 @@ use Mix.Config
 # The MIX_TEST_PARTITION environment variable can be used
 # to provide built-in test partitioning in CI environment.
 # Run `mix help test` for more information.
-config :useindie, UseIndie.Repo,
+config :boilername, BoilerName.Repo,
   username: "postgres",
   password: "postgres",
   database: "useindie_test#{System.get_env("MIX_TEST_PARTITION")}",
@@ -14,7 +14,7 @@ config :useindie, UseIndie.Repo,
 
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
-config :useindie, UseIndieWeb.Endpoint,
+config :boilername, UseIndieWeb.Endpoint,
   http: [port: 4002],
   server: false
 
@@ -24,4 +24,4 @@ config :logger, level: :warn
 # https://hexdocs.pm/bcrypt_elixir/Bcrypt.html
 config :bcrypt_elixir, log_rounds: 4
 
-config :useindie, UseIndieWeb.Mailer, adapter: Bamboo.TestAdapter
+config :boilername, UseIndieWeb.Mailer, adapter: Bamboo.TestAdapter

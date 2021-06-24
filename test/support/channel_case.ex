@@ -29,10 +29,10 @@ defmodule UseIndieWeb.ChannelCase do
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(UseIndie.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(BoilerName.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(UseIndie.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(BoilerName.Repo, {:shared, self()})
     end
 
     :ok

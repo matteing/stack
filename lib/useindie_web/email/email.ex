@@ -21,7 +21,7 @@ defmodule UseIndieWeb.Email do
 
   def base_email do
     new_email()
-    |> from("hey@useindie.com")
+    |> from("hey@boilername.com")
     |> put_html_layout({UseIndieWeb.LayoutView, "email.html"})
   end
 end

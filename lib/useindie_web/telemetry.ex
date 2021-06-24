@@ -31,11 +31,11 @@ defmodule UseIndieWeb.Telemetry do
       ),
 
       # Database Metrics
-      summary("useindie.repo.query.total_time", unit: {:native, :millisecond}),
-      summary("useindie.repo.query.decode_time", unit: {:native, :millisecond}),
-      summary("useindie.repo.query.query_time", unit: {:native, :millisecond}),
-      summary("useindie.repo.query.queue_time", unit: {:native, :millisecond}),
-      summary("useindie.repo.query.idle_time", unit: {:native, :millisecond}),
+      summary("boilername.repo.query.total_time", unit: {:native, :millisecond}),
+      summary("boilername.repo.query.decode_time", unit: {:native, :millisecond}),
+      summary("boilername.repo.query.query_time", unit: {:native, :millisecond}),
+      summary("boilername.repo.query.queue_time", unit: {:native, :millisecond}),
+      summary("boilername.repo.query.idle_time", unit: {:native, :millisecond}),
 
       # VM Metrics
       summary("vm.memory.total", unit: {:byte, :kilobyte}),

@@ -20,5 +20,5 @@ defmodule UseIndieWeb.Gettext do
 
   See the [Gettext Docs](https://hexdocs.pm/gettext) for detailed usage.
   """
-  use Gettext, otp_app: :useindie
+  use Gettext, otp_app: :boilername
 end

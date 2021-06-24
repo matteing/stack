@@ -1,4 +1,4 @@
-defmodule UseIndie.Repo.Migrations.CreateUsersAuthTables do
+defmodule BoilerName.Repo.Migrations.CreateUsersAuthTables do
   use Ecto.Migration
 
   def change do

@@ -1,11 +1,11 @@
-defmodule UseIndie.Auth do
+defmodule BoilerName.Auth do
   @moduledoc """
   The Auth context.
   """
 
   import Ecto.Query, warn: false
-  alias UseIndie.Repo
-  alias UseIndie.Auth.{User, UserToken, UserNotifier}
+  alias BoilerName.Repo
+  alias BoilerName.Auth.{User, UserToken, UserNotifier}
 
   ## Database getters
 

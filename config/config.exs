@@ -7,16 +7,16 @@
 # General application configuration
 use Mix.Config
 
-config :useindie,
-  namespace: UseIndie,
-  ecto_repos: [UseIndie.Repo]
+config :boilername,
+  namespace: BoilerName,
+  ecto_repos: [BoilerName.Repo]
 
 # Configures the endpoint
-config :useindie, UseIndieWeb.Endpoint,
+config :boilername, UseIndieWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "SECRET_FOR_DEV_GOES_HERE",
   render_errors: [view: UseIndieWeb.ErrorView, accepts: ~w(json), layout: false],
-  pubsub_server: UseIndie.PubSub,
+  pubsub_server: BoilerName.PubSub,
   live_view: [signing_salt: "SIGNING_SALT_GOES_HERE"]
 
 # Configures Elixir's Logger

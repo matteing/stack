@@ -2,9 +2,9 @@ defmodule UseIndieWeb.AuthControllerTest do
   use UseIndieWeb.ConnCase, async: true
   use Bamboo.Test
 
-  import UseIndie.Factory
-  alias UseIndie.Auth
-  alias UseIndie.Repo
+  import BoilerName.Factory
+  alias BoilerName.Auth
+  alias BoilerName.Repo
 
   @correct_credentials %{email: "test0@test0.local", password: "test000"}
   @incorrect_credentials %{email: "incorrect", password: "incorrect"}
