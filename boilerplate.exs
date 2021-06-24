@@ -54,6 +54,7 @@ defmodule BoilerplateSetup do
       |> Enum.map(&Path.dirname/1)
       # Remove invalid paths
       |> Enum.filter(fn path -> path != "." end)
+      |> Enum.uniq()
       # Sort by length, start with the root paths first
       |> Enum.sort_by(&String.length/1)
 
