@@ -1,9 +1,11 @@
 defmodule BoilerplateSetup do
   @folders ~w(lib test priv config)
+  @extra_files ["./mix.exs", "coveralls.json"]
+  @to_delete ["./lib/useindie", "./lib/useindie_web", "./boilerplate.exs"]
 
   def main() do
     IO.puts("--> Welcome to the boilerplate setup")
-    files = List.flatten(Enum.map(@folders, &traverse_path/1))
+    files = List.flatten(Enum.map(@folders, &traverse_path/1)) ++ @extra_files
     module_name = String.trim(IO.gets("App name (e.g. UseIndie): "))
     otp_name = String.trim(IO.gets("OTP name, underscored (e.g. useindie): "))
 
@@ -30,8 +32,8 @@ defmodule BoilerplateSetup do
       process_file_secrets(file, %{secret_key: secret_key, signing_salt: signing_salt})
     end)
 
-    IO.puts("--> Deleting this file.")
-    File.rm!(__ENV__.file)
+    IO.puts("--> Cleaning up...")
+    cleanup()
   end
 
   def process_file(file, %{:module_name => module_name, :otp_name => otp_name}) do
@@ -40,7 +42,13 @@ defmodule BoilerplateSetup do
       |> String.replace("UseIndie", module_name, global: true)
       |> String.replace("useindie", otp_name, global: true)
 
-    File.write(file, replaced_content)
+    replaced_name =
+      file
+      |> String.replace("useindie", otp_name, global: true)
+
+    File.write!(file, replaced_content)
+    File.mkdir_p!(replaced_name |> Path.dirname())
+    File.rename!(file, replaced_name)
   end
 
   def process_file_secrets(file, %{:secret_key => secret_key, :signing_salt => signing_salt}) do
@@ -50,6 +58,11 @@ defmodule BoilerplateSetup do
       |> String.replace("SIGNING_SALT_GOES_HERE", signing_salt, global: true)
 
     File.write(file, replaced_content)
+  end
+
+  def cleanup() do
+    Enum.each(@to_delete, &IO.puts/1)
+    # Enum.each(@to_delete, &File.rm!/1)
   end
 
   defp random_string(length) when length > 31 do
