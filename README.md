@@ -1,6 +1,6 @@
 # My Elixir Boilerplate
 
-This is my boilerplate for new Elixir/Phoenix-based applications. This boilerplate includes a fully functional authentication system, integration with Next.js and common utilities like a mailer and API routes.
+This is my boilerplate for new Elixir/Phoenix-based applications. It includes a fully functional authentication system, integration with Next.js and common utilities like a mailer and API routes.
 
 ## Installation
 
