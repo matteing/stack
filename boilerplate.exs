@@ -49,7 +49,11 @@ defmodule BoilerplateSetup do
   end
 
   def rename_paths(files, %{:otp_name => otp_name}) do
-    paths = Enum.map(files, &Path.dirname/1)
+    paths =
+      files
+      |> Enum.map(&Path.dirname/1)
+      # Sort by length, start with the root paths first
+      |> Enum.sort_by(&String.length/1)
 
     Enum.each(paths, fn path ->
       IO.puts("renaming #{path}")
