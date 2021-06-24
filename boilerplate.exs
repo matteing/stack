@@ -59,7 +59,7 @@ defmodule BoilerplateSetup do
       |> Enum.sort_by(&String.length/1)
 
     Enum.each(paths, fn path ->
-      if String.contains?("boilername") and File.exists?(path) do
+      if String.contains?(path, "boilername") and File.exists?(path) do
         IO.puts("renaming #{path}")
         new_path = String.replace(path, "boilername", otp_name, global: true)
         File.mkdir_p!(new_path)
