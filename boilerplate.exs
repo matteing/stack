@@ -6,7 +6,7 @@ defmodule BoilerplateSetup do
 
   def main() do
     IO.puts("--> Welcome to the boilerplate setup")
-    files = List.flatten(Enum.map(@folders, &traverse_path/1)) ++ @extra_files
+    files = List.flatten(Enum.map(@folders, &traverse_path_files/1)) ++ @extra_files
     module_name = String.trim(IO.gets("App name (e.g. BoilerName): "))
     otp_name = String.trim(IO.gets("OTP name, underscored (e.g. boilername): "))
 
@@ -18,7 +18,8 @@ defmodule BoilerplateSetup do
       process_file(file, %{module_name: module_name, otp_name: otp_name})
     end)
 
-    rename_paths(files, %{module_name: module_name, otp_name: otp_name})
+    directories = List.flatten(Enum.map(@folders, &traverse_path_dirs/1))
+    rename_paths(directories, %{module_name: module_name, otp_name: otp_name})
 
     IO.puts("--> Boilerplate generation complete.")
     IO.puts("--> Generating secret key...")
@@ -32,7 +33,7 @@ defmodule BoilerplateSetup do
     IO.puts(String.replace(signing_salt, ~r/(?<=\A.).*(?=.\z)/, "***"))
 
     # Get paths again as old path names are invalid
-    config_files = List.flatten(Enum.map(@config_folders, &traverse_path/1))
+    config_files = List.flatten(Enum.map(@config_folders, &traverse_path_files/1))
 
     Enum.each(config_files, fn file ->
       process_file_secrets(file, %{secret_key: secret_key, signing_salt: signing_salt})
@@ -55,7 +56,6 @@ defmodule BoilerplateSetup do
   def rename_paths(files, %{:otp_name => otp_name}) do
     paths =
       files
-      |> Enum.map(&Path.dirname/1)
       # Remove invalid paths
       |> Enum.filter(fn path -> path != "." end)
       |> Enum.uniq()
@@ -89,7 +89,7 @@ defmodule BoilerplateSetup do
     :crypto.strong_rand_bytes(length) |> Base.encode64(padding: false) |> binary_part(0, length)
   end
 
-  def traverse_path(path \\ ".") do
+  def traverse_path_files(path \\ ".") do
     cond do
       File.regular?(path) ->
         [path]
@@ -97,11 +97,24 @@ defmodule BoilerplateSetup do
       File.dir?(path) ->
         File.ls!(path)
         |> Enum.map(&Path.join(path, &1))
-        |> Enum.map(&traverse_path/1)
+        |> Enum.map(&traverse_path_files/1)
         |> Enum.concat()
 
       true ->
         []
+    end
+  end
+
+  def traverse_path_dirs(path \\ ".") do
+    cond do
+      File.dir?(path) ->
+        File.ls!(path)
+        |> Enum.map(&Path.join(path, &1))
+        |> Enum.map(&traverse_path_dirs/1)
+        |> Enum.concat([path])
+
+      true ->
+        [path]
     end
   end
 end
