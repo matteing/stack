@@ -1,24 +1,14 @@
-# elixir-boilerplate
+# My Elixir Boilerplate
 
-To start your Phoenix server:
+This is my boilerplate for new Elixir/Phoenix-based applications. This boilerplate includes a fully functional authentication system, integration with Next.js and common utilities like a mailer and API routes.
 
-- Install dependencies with `mix deps.get`
-- Create and migrate your database with `mix ecto.setup`
-- Start Phoenix endpoint with `mix phx.server`
+## Installation
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+To setup this boilerplate:
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+- Install the boilerplate by running `make install`
+- Run `make dev` to start the development servers
 
-## Learn more
+Now you can visit [`localhost:3000`](http://localhost:3000) and [`localhost:4000`](http://localhost:4000) from your browser.
 
-- Official website: https://www.phoenixframework.org/
-- Guides: https://hexdocs.pm/phoenix/overview.html
-- Docs: https://hexdocs.pm/phoenix
-- Forum: https://elixirforum.com/c/phoenix-forum
-- Source: https://github.com/phoenixframework/phoenix
-
-### Why I switched to Elixir and Phoenix
-
-- Reliability, performance guarantees from the BEAM
-- Cause I feel like it
+Ready to run in production? Please [check the Phoenix deployment guides](https://hexdocs.pm/phoenix/deployment.html).
