@@ -51,9 +51,9 @@ defmodule BoilerplateSetup do
   def rename_paths(files, %{:otp_name => otp_name}) do
     paths =
       files
+      |> Enum.map(&Path.dirname/1)
       # Remove invalid paths
       |> Enum.filter(fn path -> path != "." end)
-      |> Enum.map(&Path.dirname/1)
       # Sort by length, start with the root paths first
       |> Enum.sort_by(&String.length/1)
 
