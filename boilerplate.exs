@@ -2,13 +2,21 @@ defmodule BoilerplateSetup do
   @folders ~w(lib test priv config)
 
   def main() do
+    IO.puts("!!! Welcome to the boilerplate setup")
     files = List.flatten(Enum.map(@folders, &traverse_path/1))
-    module_name = String.trim(IO.gets("Module name: "))
-    otp_name = String.trim(IO.gets("OTP name: "))
+    module_name = String.trim(IO.gets("App name (e.g. UseIndie): "))
+    otp_name = String.trim(IO.gets("OTP name, underscored (e.g. useindie): "))
+
+    if module_name == "" or otp_name == "" do
+      System.halt()
+    end
 
     Enum.each(files, fn file ->
       process_file(file, %{module_name: module_name, otp_name: otp_name})
     end)
+
+    # Delete the script file...
+    File.rm!(__ENV__.file)
   end
 
   def process_file(file, %{:module_name => module_name, :otp_name => otp_name}) do
