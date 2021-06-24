@@ -14,10 +14,10 @@ config :useindie,
 # Configures the endpoint
 config :useindie, UseIndieWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "NqAblh4diczoVsBw2LJd0XLubkpE4TTQj7/d8JEtIPfewXlrsK9ucNiN030imqtw",
+  secret_key_base: "SECRET_FOR_DEV_GOES_HERE",
   render_errors: [view: UseIndieWeb.ErrorView, accepts: ~w(json), layout: false],
   pubsub_server: UseIndie.PubSub,
-  live_view: [signing_salt: "VAeKVOrk"]
+  live_view: [signing_salt: "SIGNING_SALT_GOES_HERE"]
 
 # Configures Elixir's Logger
 config :logger, :console,
