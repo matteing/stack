@@ -7,7 +7,7 @@ install:
 	mix setup
 	cd app; npm install
 	mix test
-	[ -f ./boilerplate.exs ] && mix run boilerplate.exs
+	[ -f ./boilerplate.exs ] && elixir boilerplate.exs
 
 dev:
 	$(CONCURRENTLY) \
