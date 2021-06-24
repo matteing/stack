@@ -18,14 +18,19 @@ defmodule BoilerplateSetup do
     IO.puts("--> Boilerplate generation complete.")
     IO.puts("--> Generating secret key...")
 
-    Mix.Tasks.Phx.Gen.Secret.run([])
+    secret_key = random_string(64)
+    IO.puts(secret_key)
 
     IO.puts("--> Generating signing salt...")
 
-    Mix.Tasks.Phx.Gen.Secret.run(["32"])
+    signing_salt = random_string(32)
+    IO.puts(signing_salt)
 
-    IO.puts("--> Edit your config.exs with these values.")
-    IO.puts("--> Optionally delete this file as well.")
+    Enum.each(files, fn file ->
+      process_file_secrets(file, %{secret_key: secret_key, signing_salt: signing_salt})
+    end)
+
+    IO.puts("--> Optionally delete this file.")
   end
 
   def process_file(file, %{:module_name => module_name, :otp_name => otp_name}) do
@@ -35,6 +40,19 @@ defmodule BoilerplateSetup do
       |> String.replace("useindie", otp_name, global: true)
 
     File.write(file, replaced_content)
+  end
+
+  def process_file_secrets(file, %{:secret_key => secret_key, :signing_salt => signing_salt}) do
+    replaced_content =
+      File.read!(file)
+      |> String.replace("SECRET_FOR_DEV_GOES_HERE", secret_key, global: true)
+      |> String.replace("SIGNING_SALT_GOES_HERE", signing_salt, global: true)
+
+    File.write(file, replaced_content)
+  end
+
+  defp random_string(length) when length > 31 do
+    :crypto.strong_rand_bytes(length) |> Base.encode64(padding: false) |> binary_part(0, length)
   end
 
   def traverse_path(path \\ ".") do
