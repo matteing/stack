@@ -65,7 +65,7 @@ defmodule BoilerplateSetup do
     Enum.each(paths, fn path ->
       if String.contains?(path, "boilername") and File.exists?(path) do
         # Rename rightmost first, as we descend the tree
-        new_path = String.replace_suffix(path, "boilername", otp_name)
+        new_path = String.replace(path, "boilername", otp_name)
         IO.puts("renaming #{path} -> #{new_path}")
         File.rename!(path, new_path)
       end
