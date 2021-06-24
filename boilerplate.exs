@@ -59,14 +59,14 @@ defmodule BoilerplateSetup do
       # Remove invalid paths
       |> Enum.filter(fn path -> path != "." end)
       |> Enum.uniq()
-      # Sort by length, start with the root paths first
-      |> Enum.sort_by(&String.length/1)
+      # Sort by length, start with the last updated paths first
+      |> Enum.sort_by(&String.length/1, :desc)
 
     Enum.each(paths, fn path ->
       if String.contains?(path, "boilername") and File.exists?(path) do
         IO.puts("renaming #{path}")
-        new_path = String.replace(path, "boilername", otp_name, global: true)
-        File.mkdir_p!(new_path)
+        # Rename rightmost first, as we descend the tree
+        new_path = String.replace_trailing(path, "boilername", otp_name)
         File.rename!(path, new_path)
       end
     end)
