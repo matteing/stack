@@ -17,6 +17,8 @@ defmodule BoilerplateSetup do
       process_file(file, %{module_name: module_name, otp_name: otp_name})
     end)
 
+    rename_paths(files, %{module_name: module_name, otp_name: otp_name})
+
     IO.puts("--> Boilerplate generation complete.")
     IO.puts("--> Generating secret key...")
 
@@ -46,9 +48,19 @@ defmodule BoilerplateSetup do
       file
       |> String.replace("boilername", otp_name, global: true)
 
+    IO.puts("writing ${file}")
     File.write!(file, replaced_content)
-    File.mkdir_p!(replaced_name |> Path.dirname())
-    File.rename!(file, replaced_name)
+  end
+
+  def rename_paths(files, %{:module_name => module_name, :otp_name => otp_name}) do
+    paths = Enum.map(files, &Path.dirname/1)
+
+    Enum.each(new_paths, fn path ->
+      IO.puts("renaming ${path}")
+      new_path = String.replace(path, "boilername", otp_name, global: true)
+      File.mkdir_p!(new_path)
+      File.rename!(path, new_path)
+    end)
   end
 
   def process_file_secrets(file, %{:secret_key => secret_key, :signing_salt => signing_salt}) do
