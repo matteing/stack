@@ -1,5 +1,6 @@
 defmodule BoilerplateSetup do
   @folders ~w(lib test priv config)
+  @config_folders ~w(config)
   @extra_files ["./mix.exs", "coveralls.json"]
   @to_delete ["./lib/boilername", "./lib/boilername_web", "./boilerplate.exs"]
 
@@ -30,7 +31,10 @@ defmodule BoilerplateSetup do
     signing_salt = random_string(32)
     IO.puts(String.replace(signing_salt, ~r/(?<=\A.).*(?=.\z)/, "***"))
 
-    Enum.each(files, fn file ->
+    # Get paths again as old path names are invalid
+    config_files = List.flatten(Enum.map(@config_folders, &traverse_path/1))
+
+    Enum.each(config_files, fn file ->
       process_file_secrets(file, %{secret_key: secret_key, signing_salt: signing_salt})
     end)
 
