@@ -5,7 +5,7 @@ This is my boilerplate for new Elixir/Phoenix-based applications. It includes a 
 ## Quick start
 
 ```
-export FOLDER=folder; git --git-dir=/dev/null clone --depth=1 https://github.com/matteing/elixir-boilerplate $FOLDER; cd $FOLDER; make install
+export FOLDER=folder; git --git-dir=/dev/null clone --depth=1 https://github.com/matteing/elixir-boilerplate $FOLDER; cd $FOLDER; make install; rm -rf .git
 ```
 
 ## Installation
