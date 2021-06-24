@@ -4,10 +4,10 @@ CONCURRENTLY := ./app/node_modules/.bin/concurrently
 
 install:
 	mix deps.get
-	[ -f ./boilerplate.exs ] && mix run boilerplate.exs
 	mix setup
 	cd app; npm install
 	mix test
+	[ -f ./boilerplate.exs ] && mix run boilerplate.exs
 
 dev:
 	$(CONCURRENTLY) \
