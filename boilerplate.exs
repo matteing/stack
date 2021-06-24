@@ -19,18 +19,19 @@ defmodule BoilerplateSetup do
     IO.puts("--> Generating secret key...")
 
     secret_key = random_string(64)
-    IO.puts(secret_key)
+    IO.puts(String.replace(secret_key, ~r/(?<=\A.).*(?=.\z)/, "***"))
 
     IO.puts("--> Generating signing salt...")
 
     signing_salt = random_string(32)
-    IO.puts(signing_salt)
+    IO.puts(String.replace(signing_salt, ~r/(?<=\A.).*(?=.\z)/, "***"))
 
     Enum.each(files, fn file ->
       process_file_secrets(file, %{secret_key: secret_key, signing_salt: signing_salt})
     end)
 
-    IO.puts("--> Optionally delete this file.")
+    IO.puts("--> Deleting this file.")
+    File.rm!(__ENV__.file)
   end
 
   def process_file(file, %{:module_name => module_name, :otp_name => otp_name}) do
