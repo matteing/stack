@@ -60,7 +60,7 @@ defmodule BoilerplateSetup do
       |> Enum.filter(fn path -> path != "." end)
       |> Enum.uniq()
       # Sort by length, start with the last updated paths first
-      |> Enum.sort_by(&String.length/1, :desc)
+      |> Enum.sort_by(&String.length/1, :asc)
 
     Enum.each(paths, fn path ->
       if String.contains?(path, "boilername") and File.exists?(path) do
