@@ -36,5 +36,58 @@
 	"prettier": {
 		"tabWidth": 4,
 		"useTabs": true
+	},
+	"eslintConfig": {
+		"root": true,
+		"parser": "babel-eslint",
+		"env": {
+			"browser": true,
+			"es2020": true,
+			"node": true
+		},
+		"extends": [
+			"eslint:recommended",
+			"plugin:react/recommended",
+			"plugin:tailwind/recommended"
+		],
+		"parserOptions": {
+			"ecmaFeatures": {
+				"jsx": true
+			},
+			"ecmaVersion": 11,
+			"sourceType": "module"
+		},
+		"plugins": ["react", "react-hooks", "lodash"],
+		"rules": {
+			"no-console": "error",
+			"no-restricted-imports": [
+				"error",
+				{
+					"paths": [
+						{
+							"name": "react-query",
+							"importNames": ["queryCache"],
+							"message": "Use useQueryCache instead."
+						}
+					]
+				}
+			],
+			"no-unused-vars": ["error", { "vars": "all", "args": "after-used", "varsIgnorePattern": "_key" }],
+			"react/react-in-jsx-scope": 0,
+			"react/prop-types": 0,
+			"react/no-unescaped-entities": 0,
+			"react-hooks/rules-of-hooks": "error",
+			"react-hooks/exhaustive-deps": "warn",
+			"lodash/import-scope": "error"
+		},
+		"globals": {
+			"React": "writable"
+		},
+		"settings": {
+			"react": {
+				"version": "detect"
+			}
+		},
+		"ignorePatterns": [".next"]
 	}
 }

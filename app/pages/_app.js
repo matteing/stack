@@ -1,6 +1,6 @@
 import { LayoutTree } from "@moxy/next-layout";
 import { Provider } from "next-auth/client";
-import Shell from "components/layouts/Shell";
+import Shell from "components/Shell";
 import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
