@@ -1,7 +1,7 @@
 .PHONY: install app api migrate
 SHELL := /bin/bash
 CONCURRENTLY := ./app/node_modules/.bin/concurrently
-MIX := MIX_EXS=./server/mix.exs mix
+MIX := cd server; mix
 
 install:
 	cd server; [ -f ./boilerplate.exs ] && elixir ./boilerplate.exs
