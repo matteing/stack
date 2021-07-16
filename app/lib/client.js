@@ -2,14 +2,30 @@ import axios from "axios";
 import { API_URL } from "config";
 import { getSession } from "next-auth/client";
 import { prettyAxiosError } from "./error";
+import { QueryClient } from "react-query";
+import { dehydrate } from "react-query/hydration";
 
 const client = axios.create({
 	baseURL: API_URL,
 });
 
+export async function fetchQueriesOnServer(...queries) {
+	const queryClient = new QueryClient();
+
+	const collectedQueries = queries.map((query) =>
+		queryClient.prefetchQuery(query[0], query[1])
+	);
+	await Promise.all(collectedQueries);
+
+	return {
+		props: {
+			dehydratedState: dehydrate(queryClient),
+		},
+	};
+}
+
 client.interceptors.request.use(
 	async (config) => {
-		// This makes a get request too!
 		const session = await getSession();
 		if (session) {
 			const {
