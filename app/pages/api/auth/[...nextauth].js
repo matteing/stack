@@ -1,7 +1,6 @@
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
-import axios from "lib/axios";
-import { session } from "next-auth/client";
+import client from "lib/client";
 
 export default NextAuth({
 	providers: [
@@ -21,7 +20,7 @@ export default NextAuth({
 			},
 			async authorize(credentials, req) {
 				try {
-					const res = await axios.post("/auth/login/", {
+					const res = await client.post("/auth/login/", {
 						email: credentials.email,
 						password: credentials.password,
 					});

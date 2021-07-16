@@ -48,6 +48,8 @@ defmodule BoilerNameWeb.Endpoint do
     pass: ["*/*"],
     json_decoder: Phoenix.json_library()
 
+  # Set up CORS here.
+  plug Corsica, origins: "*", allow_headers: :all
   plug Plug.MethodOverride
   plug Plug.Head
   plug Plug.Session, @session_options

@@ -55,7 +55,8 @@ defmodule BoilerName.MixProject do
       {:bamboo, "~> 2.2.0"},
       {:bcrypt_elixir, "~> 2.0"},
       {:bamboo_phoenix, "~> 1.0.0"},
-      {:excoveralls, "~> 0.10", only: :test}
+      {:excoveralls, "~> 0.10", only: :test},
+      {:corsica, "~> 1.0"}
     ]
   end
 
