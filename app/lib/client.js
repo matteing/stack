@@ -1,9 +1,13 @@
 import axios from "axios";
 import { API_URL } from "config";
-import { getSession } from "next-auth/client";
+import { useSession } from "next-auth/client";
 import { QueryClient } from "react-query";
 import { dehydrate } from "react-query/hydration";
 import { isServer } from "config";
+import { useEffect } from "react";
+import { getLogger } from "./logging";
+
+const log = getLogger("client");
 
 class AxiosError extends Error {
 	constructor(message, status_code = false, field_errors = null) {
@@ -94,7 +98,34 @@ export async function fetchQueriesOnServer(...queries) {
 	};
 }
 
-client.interceptors.request.use(
+export function useTokenRefresh() {
+	const [session, _] = useSession();
+
+	useEffect(() => {
+		if (!isServer && session) {
+			const {
+				user: { token },
+			} = session;
+			if (
+				!axios.defaults.headers.common["Authorization"] ||
+				axios.defaults.headers.common["Authorization"] !== token
+			) {
+				log("Setting session token.");
+				axios.defaults.headers.common["Authorization"] = token;
+			}
+		} else {
+			log("Deleting session token.");
+			delete axios.defaults.headers.common["Authorization"];
+		}
+	}, [session]);
+}
+
+export function ClientTokenRefresher() {
+	useTokenRefresh();
+	return null;
+}
+
+/* client.interceptors.request.use(
 	async (config) => {
 		if (!isServer) {
 			const session = await getSession();
@@ -110,7 +141,7 @@ client.interceptors.request.use(
 	(error) => {
 		Promise.reject(error);
 	}
-);
+); */
 
 client.interceptors.response.use(
 	(response) => response,
