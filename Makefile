@@ -4,7 +4,6 @@ CONCURRENTLY := ./app/node_modules/.bin/concurrently
 MIX := cd server; mix
 
 install:
-	cd server; [ -f ./boilerplate.exs ] && elixir ./boilerplate.exs
 	$(MIX) deps.get
 	cd app; npm install
 	$(MIX) ecto.create
