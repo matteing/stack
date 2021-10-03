@@ -99,7 +99,7 @@ export async function fetchQueriesOnServer(...queries) {
 }
 
 export function useTokenRefresh() {
-	const [session, _] = useSession();
+	const [session, _key] = useSession();
 
 	useEffect(() => {
 		if (!isServer && session) {
