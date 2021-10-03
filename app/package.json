@@ -18,7 +18,8 @@
 		"next": "11.0.0",
 		"next-auth": "^3.27.0",
 		"react": "17.0.2",
-		"react-dom": "17.0.2"
+		"react-dom": "17.0.2",
+		"react-query": "^3.25.0"
 	},
 	"devDependencies": {
 		"@babel/eslint-parser": "^7.14.5",
@@ -57,7 +58,11 @@
 			"ecmaVersion": 11,
 			"sourceType": "module"
 		},
-		"plugins": ["react", "react-hooks", "lodash"],
+		"plugins": [
+			"react",
+			"react-hooks",
+			"lodash"
+		],
 		"rules": {
 			"no-console": "error",
 			"no-restricted-imports": [
@@ -66,13 +71,22 @@
 					"paths": [
 						{
 							"name": "react-query",
-							"importNames": ["queryCache"],
+							"importNames": [
+								"queryCache"
+							],
 							"message": "Use useQueryCache instead."
 						}
 					]
 				}
 			],
-			"no-unused-vars": ["error", { "vars": "all", "args": "after-used", "varsIgnorePattern": "_key" }],
+			"no-unused-vars": [
+				"error",
+				{
+					"vars": "all",
+					"args": "after-used",
+					"varsIgnorePattern": "_key"
+				}
+			],
 			"react/react-in-jsx-scope": 0,
 			"react/prop-types": 0,
 			"react/no-unescaped-entities": 0,
@@ -88,6 +102,8 @@
 				"version": "detect"
 			}
 		},
-		"ignorePatterns": [".next"]
+		"ignorePatterns": [
+			".next"
+		]
 	}
 }
