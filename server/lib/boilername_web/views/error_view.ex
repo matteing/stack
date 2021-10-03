@@ -3,6 +3,10 @@ defmodule BoilerNameWeb.ErrorView do
 
   # If you want to customize a particular status code
   # for a certain format, you may uncomment below.
+  # def render("500.json", _assigns) do
+  #   %{errors: %{detail: "Internal Server Error"}}
+  # end
+
   def render("400.json", %{error: error}) do
     %{errors: [error]}
   end

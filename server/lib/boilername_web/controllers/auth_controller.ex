@@ -12,11 +12,11 @@ defmodule BoilerNameWeb.AuthController do
   plug :get_user_by_reset_password_token when action in [:reset_password]
 
   def index(conn, _) do
-    render(conn, "index.json", user: current_user(conn))
+    render(conn, "index.json", user: conn.assigns[:current_user])
   end
 
   def update(conn, %{"user" => params}) do
-    user = current_user(conn)
+    user = conn.assigns[:current_user]
     changeset = Auth.change_user_profile(user, params)
 
     with {:ok, user} <- Repo.update(changeset) do

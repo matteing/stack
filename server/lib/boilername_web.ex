@@ -23,7 +23,6 @@ defmodule BoilerNameWeb do
 
       import Plug.Conn
       import BoilerNameWeb.Gettext
-      import BoilerNameWeb.ControllerHelper
       alias BoilerNameWeb.Router.Helpers, as: Routes
     end
   end

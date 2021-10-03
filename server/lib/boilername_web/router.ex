@@ -29,12 +29,22 @@ defmodule BoilerNameWeb.Router do
   # as long as you are also using SSL (which you should anyway).
   if Mix.env() in [:dev, :test] do
     import Phoenix.LiveDashboard.Router
-    # If using Phoenix
-    forward "/sent_emails", Bamboo.SentEmailViewerPlug
 
     scope "/" do
       pipe_through [:fetch_session, :protect_from_forgery]
       live_dashboard "/dashboard", metrics: BoilerNameWeb.Telemetry
+    end
+  end
+
+  # Enables the Swoosh mailbox preview in development.
+  #
+  # Note that preview only shows emails that were sent by the same
+  # node running the Phoenix server.
+  if Mix.env() == :dev do
+    scope "/dev" do
+      pipe_through [:fetch_session, :protect_from_forgery]
+
+      forward "/mailbox", Plug.Swoosh.MailboxPreview
     end
   end
 end

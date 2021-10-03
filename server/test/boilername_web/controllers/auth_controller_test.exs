@@ -1,6 +1,6 @@
 defmodule BoilerNameWeb.AuthControllerTest do
   use BoilerNameWeb.ConnCase, async: true
-  use Bamboo.Test
+  import Swoosh.TestAssertions
 
   import BoilerName.Factory
   alias BoilerName.Auth
@@ -131,7 +131,7 @@ defmodule BoilerNameWeb.AuthControllerTest do
 
       user_email = user.email
       assert json_response(conn, 200)
-      assert_delivered_email_matches(%{to: [{_, ^user_email}]})
+      assert_email_sent(to: user_email)
     end
 
     test "doesn't divulge user existence", %{conn: conn, user: user} do

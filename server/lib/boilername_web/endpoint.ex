@@ -7,12 +7,8 @@ defmodule BoilerNameWeb.Endpoint do
   @session_options [
     store: :cookie,
     key: "_boilername_key",
-    signing_salt: "qGlSdizz"
+    signing_salt: "5TZXPlEE"
   ]
-
-  socket "/socket", BoilerNameWeb.UserSocket,
-    websocket: true,
-    longpoll: false
 
   socket "/live", Phoenix.LiveView.Socket, websocket: [connect_info: [session: @session_options]]
 
@@ -24,7 +20,7 @@ defmodule BoilerNameWeb.Endpoint do
     at: "/",
     from: :boilername,
     gzip: false,
-    only: ~w(css fonts images js favicon.ico robots.txt)
+    only: ~w(assets fonts images favicon.ico robots.txt)
 
   # Serve uploads
   plug Plug.Static, at: "/uploads", from: "uploads/"
